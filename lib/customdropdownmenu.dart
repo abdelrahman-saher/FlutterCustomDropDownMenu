@@ -29,25 +29,25 @@ class CustomDropDown extends StatefulWidget {
   CustomDropDown({
     this.title,
     this.headerIcon,
-    this.hintText,
-    this.items,
-    this.onSelected,
-    this.error,
-    this.errorMessage,
+    @required this.hintText,
+    @required this.items,
+    @required this.onSelected,
+    @required this.error,
+    @required this.errorMessage,
     this.selectedItem,
-    this.withoutHeader = false,
+    @required this.withoutHeader,
     this.iconColor = Colors.white,
-    this.bgColor,
+    @required this.bgColor,
     this.textColor = Colors.white,
-    this.dividerColor,
+    @required this.dividerColor,
     this.withBorder = false,
     this.borderColor,
     this.headerColor = Colors.white,
-    this.direction,
-    this.errorMessageSize,
+    @required this.direction,
+    @required this.errorMessageSize,
     this.titleSize,
     this.borderRadius,
-    this.itemsTextSize,
+    @required this.itemsTextSize,
     this.iconSize = 20,
     this.headerIconColor,
     this.borderWidth = 1,
@@ -160,7 +160,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
               : Container(),
           Center(
             child: Row(
-              children: widget.direction == Direction.Left
+              children: widget.direction == Direction.LTR
                   ? _baseRowItems().reversed.toList()
                   : _baseRowItems(),
             ),
@@ -174,7 +174,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
     return [
       Container(
         margin: widget.withBorder
-            ? widget.direction == Direction.Right
+            ? widget.direction == Direction.RTL
                 ? EdgeInsets.only(
                     top: widget.borderWidth,
                     left: widget.borderWidth,
@@ -187,7 +187,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
         height: widget.withBorder ? (50 - (2 * widget.borderWidth)) : 50,
         decoration: BoxDecoration(
           color: widget.bgColor,
-          borderRadius: widget.direction == Direction.Right
+          borderRadius: widget.direction == Direction.RTL
               ? BorderRadius.only(
                   topLeft: Radius.circular(widget.borderRadius),
                   bottomLeft: showMenu
@@ -209,21 +209,21 @@ class _CustomDropDownState extends State<CustomDropDown> {
       ),
       Expanded(
         child: Container(
-          padding: widget.direction == Direction.Right
+          padding: widget.direction == Direction.RTL
               ? EdgeInsets.only(right: 20)
               : EdgeInsets.only(left: 20),
-          alignment: widget.direction == Direction.Right
+          alignment: widget.direction == Direction.RTL
               ? Alignment.centerRight
               : Alignment.centerLeft,
           height: widget.withBorder ? (50 - (2 * widget.borderWidth)) : 50,
           margin: widget.withBorder
-              ? widget.direction == Direction.Right
+              ? widget.direction == Direction.RTL
                   ? EdgeInsets.only(right: widget.borderWidth)
                   : EdgeInsets.only(left: widget.borderWidth)
               : EdgeInsets.all(0),
           decoration: BoxDecoration(
             color: widget.bgColor,
-            borderRadius: widget.direction == Direction.Right
+            borderRadius: widget.direction == Direction.RTL
                 ? BorderRadius.only(
                     topRight: Radius.circular(widget.borderRadius),
                     bottomRight: showMenu
@@ -328,7 +328,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
           ),
           Container(
             height: 40,
-            alignment: widget.direction == Direction.Right
+            alignment: widget.direction == Direction.RTL
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
             child: Text(
@@ -375,10 +375,10 @@ class _CustomDropDownState extends State<CustomDropDown> {
             ? Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
-                  mainAxisAlignment: widget.direction == Direction.Right
+                  mainAxisAlignment: widget.direction == Direction.RTL
                       ? MainAxisAlignment.end
                       : MainAxisAlignment.start,
-                  children: widget.direction == Direction.Left
+                  children: widget.direction == Direction.LTR
                       ? _buildHeaderItems().reversed.toList()
                       : _buildHeaderItems(),
                 ),
@@ -396,11 +396,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
         widget.error
             ? Container(
                 height: 20,
-                padding: widget.direction == Direction.Right
+                padding: widget.direction == Direction.RTL
                     ? EdgeInsets.only(right: 20)
                     : EdgeInsets.only(left: 20),
                 margin: EdgeInsets.only(top: 5),
-                alignment: widget.direction == Direction.Right
+                alignment: widget.direction == Direction.RTL
                     ? Alignment.centerRight
                     : Alignment.centerLeft,
                 child: Text(
@@ -470,4 +470,4 @@ class SemiRoundedBorderClipper extends CustomClipper<Rect> {
   }
 }
 
-enum Direction { Right, Left }
+enum Direction { RTL, LTR }
