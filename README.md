@@ -33,8 +33,10 @@ Since customization requires a lot of properties, here is a quick cheatsheet:
 |borderWidth|the width of the border (by default = 1)|
 
 ## How to use
-Simply create a CustomDropDown widget, and pass the required params:
+Simply create a CustomDropDown widget, and pass the required params.
+
 hint : items is a list of maps ({"name": the name of the item,"value":the id of the item})
+
 let's first initialize the error variable and the selected item
 ```dart
 bool error = false;
