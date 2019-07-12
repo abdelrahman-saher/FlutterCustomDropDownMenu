@@ -1,6 +1,6 @@
 # customdropdownmenu
 
-Use this package if you need more customization with DropDownMenu.
+Use this widget if you need more customization with DropDownMenu.
 
 # Quick reference 
 Since customization requires a lot of properties, here is a quick cheatsheet:
